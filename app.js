@@ -4,7 +4,9 @@ const port = 8081;
 const session = require('express-session');
 const mustacheExpress = require('mustache-express');
 const fileUpload = require('express-fileupload');
-var fs = require('fs'); 
+const fs = require('fs'); 
+require('dotenv').config()
+// console.log(process.env)
 
 // Include the mustache engine to help us render our pages
 app.engine("mustache", mustacheExpress());

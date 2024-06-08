@@ -5,8 +5,59 @@
 <div class="container overflow-auto">
 	<div class="text-center">
 		<div class="header">
-			<h1 class="display-3">Door Control</h1>
+			<h1 class="display-3">Door Lock Control</h1>
 		</div>
+
+        <div class="row">
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+            <div class="col-sm-4 mb-3 mb-sm-0">   
+                <div class="card">
+                    <div class="card-body">
+                        <label for="unlock">
+                            <h1 class="card-title display-6">Unlock the door</h1>
+                            <form action="/door/unlock" encType="multipart/form-data" method="post">
+                                <button type="submit" id="unlock" class="btn btn-success btn-circle btn-xl">
+                                    <i class="fa-solid fa-key"></i>
+                                </button>
+                            </form>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="lock">
+                            <h1 class="card-title display-6">Lock the door</h1>
+                            <form action="/door/lock" encType="multipart/form-data" method="post">
+                                <button type="submit" id="lock" class="btn btn-danger btn-circle btn-xl">
+                                    <i class="fa-solid fa-lock"></i>
+                                </button>
+                            </form>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+            <div class="col-sm-8">
+                {{#succeed_message}}
+                <div class="alert alert-success mt-3" role="alert">
+                    {{ succeed_message }}
+                </div>
+                {{/succeed_message}}
+                {{#failed_message}}
+                <div class="alert alert-warning mt-3" role="alert">
+                    {{ failed_message }}
+                </div>
+                {{/failed_message}}
+            </div>
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+        </div>
+        
 		
 	</div>
 </div>

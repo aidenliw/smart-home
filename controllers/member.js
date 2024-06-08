@@ -1,6 +1,5 @@
 const express = require('express');
 var router = express.Router();
-const UsersModel = require('../models/users.js');
 const ImagesModel = require('../models/images.js');
 
 // Display the member page
