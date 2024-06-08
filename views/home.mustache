@@ -1,0 +1,67 @@
+{{>header}}
+
+{{>navigation}}
+
+<div class="container overflow-auto">
+	<div class="text-center">
+		<div class="header">
+			<h1 class="display-3">Smart Home Application</h1>
+		</div>
+		<h1>Welcome!</h1>
+		<p>In today's world, ensuring the safety and security of your home is more critical than ever. 
+		Our advanced home security system leverages cutting-edge technology to provide you with peace 
+		of mind. With features like motion detection, camera tracking, and remote access, our system 
+		offers comprehensive protection for your home. Using our intuitive web application, you can 
+		easily monitor and control your security settings from anywhere. Simply log in to remotely 
+		unlock your door, view real-time data, and stay informed about the safety of your home. 
+		Thank you for choosing our smart security solution to safeguard your home.</p>
+		<img src="./images/process.png" style="max-width:100%">
+		<p>Our home security system project is designed to enhance the safety and convenience of your 
+		home through advanced technology. The system is composed of several key modules, each playing 
+		a vital role in ensuring comprehensive security:</p>
+		<ol class="list-group">
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">1. Motion Detection</div>
+					Utilizes ultrasonic sensors or PIR sensors to detect the presence of individuals approaching the home.
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">2. Tracking and Recognition</div>
+					Features a camera with a rotation mechanism for tracking detected individuals, with options for 1 Degree of Freedom (DOF) or 2 DOF tracking.
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">3. Gain Access</div>
+					Offers multiple access control methods including a keypad with a password or an RFID key card. 
+					A demonstration version uses a push button and LED light to indicate access status.
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">4. Alert Mechanism</div>
+					Integrates a buzzer and notification system to alert homeowners of potential intrusions. 
+					Sends real-time alerts and images to a web account or via SMS to a cell phone.
+				</div>
+			</li>
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+					<div class="fw-bold">5. Remote Control</div>
+					Provides a web server for remote monitoring and control.
+					Allows users to log in and manage the system, unlock the door, and monitor alerts for both known guests and strangers.
+				</div>
+			</li>
+		</ol>
+		{{#displaylogin}}
+		<div class="alert alert-warning" role="alert">
+			<p class="text-center mb-0">Please  
+				<a class="link-underline link-underline-opacity-0" href="/login">Login</a> 
+			to access all features!</p>
+		</div>
+		{{/displaylogin}}
+	</div>
+</div>
+
+{{>footer}}

@@ -1,0 +1,48 @@
+{{>header}}
+
+{{>navigation}}
+
+<div class="container overflow-auto">
+	<div class="position-absolute top-50 start-50 translate-middle">
+		<div class="card"style="width: 25rem;">
+			<div class="card-body">
+				<h2 class="text-center">Sign-up</h2>
+				{{^signup_success}}
+				<div class="alert alert-light" role="alert">
+					<p class="text-center mb-0">Already have an account? 
+						<a class="link-underline link-underline-opacity-0" href="/login">Login</a> 
+					to access you account!</p>
+				</div>
+				{{/signup_success}}
+				{{#signup_success}}
+				<div class="alert alert-success" role="alert">
+					<p class="text-center mb-0">User account created! 
+						<a class="link-underline link-underline-opacity-0" href="/login">Login</a>
+						to access you new account.</p>
+				</div>
+				{{/signup_success}}
+				<p style="color:red;">{{ login_error }}</p>
+				<form action="/login/attemptsignup" method="post">
+					<div class="mb-3 row">
+						<label for="username" class="col-sm-3 col-form-label">Username</label>
+						<div class="col-sm-9">
+							<input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+						</div>
+					</div>
+					<div class="mb-3 row">
+						<label for="password" class="col-sm-3 col-form-label">Password</label>
+						<div class="col-sm-9">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+						</div>
+					</div>
+					<div class="text-center">
+						<p style="color:red;">{{ signup_error }}</p>
+						<button class="btn btn-primary" style="width: 8rem;" type="submit">Sign-up</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{>footer}}

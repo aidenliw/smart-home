@@ -1,0 +1,25 @@
+<footer class="py-3 my-3 mt-auto">
+ 	<div class="container">
+		<div class="nav justify-content-center border-bottom pb-3 mb-3">
+			<a href="/home" class="nav-link px-2 text-body-secondary">Home</a>
+			{{#membersacc}}
+			<a href="/member" class="nav-link px-2 text-body-secondary">Member</a>
+			{{/membersacc}}
+			{{#adminsacc}}
+			<a href="/member" class="nav-link px-2 text-body-secondary">Member</a>
+			<a href="/admin" class="nav-link px-2 text-body-secondary">Admin</a>
+			{{/adminsacc}}
+			<a href="/about" class="nav-link px-2 text-body-secondary">About</a>
+			{{#displaylogin}}
+			<a href="/login" class="nav-link px-2 text-body-secondary">Login</a>
+			{{/displaylogin}}
+			{{#displaylogout}}
+			<a href="/login/logout" class="nav-link px-2 text-body-secondary">Logout</a>
+			{{/displaylogout}}
+		</div>
+		<p class="text-center text-body-secondary">©Copyright 2024 - Cyber Physical System - Group 18</p>
+	</div>
+</footer>
+
+</body>
+</html>

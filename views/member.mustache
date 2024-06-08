@@ -1,0 +1,45 @@
+{{>header}}
+
+{{>navigation}}
+
+<div class="container overflow-auto">
+	<div class="text-center">
+		<div class="header">
+			<h1 class="display-4">Welcome <span class="text-success">{{user}}</span>!</h1>
+		</div>
+		<p>Here is your current portrait</p>
+		{{#based64}}
+		<img src="data:{{mimeType}};base64,{{based64}}" class="rounded mx-auto d-block mb-3" style="max-width:60%;max-hight:60%"/>
+		{{/based64}}
+		{{#image_message}}
+		<div class="alert alert-danger" role="alert">
+			{{image_message}}
+		</div>
+		{{/image_message}}
+		<form action="/member/delete" encType="multipart/form-data" method="post">
+			<button type="submit" class="btn btn-outline-danger" style="width: 8rem;">Delete</button>
+		</form>
+		<br />
+		<h1 class="display-5">Update Portrait</h1>
+		{{#upload_message}}
+		<div class="alert alert-success" role="alert">
+			{{ upload_message }}
+		</div>
+		{{/upload_message}}
+		{{#upload_failed_message}}
+		<div class="alert alert-warning" role="alert">
+			{{ upload_failed_message }}
+		</div>
+		{{/upload_failed_message}}
+		<form action="/member/upload" encType="multipart/form-data" method="post">
+			<div class="mb-3">
+				<label for="formFile" class="form-label">Choose a local image to upload</label>
+				<input class="form-control" type="file" id="formFile" name="img">
+			</div>
+			<button type="submit" class="btn btn-outline-primary" style="width: 8rem;">Upload</button>
+		</form>
+	</div>
+</div>
+
+
+{{>footer}}

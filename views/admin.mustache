@@ -1,0 +1,59 @@
+{{>header}}
+
+{{>navigation}}
+
+<div class="container overflow-auto">
+	<div class="text-center">
+		<div class="header">
+			<h1 class="display-4">Account Management</h1>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Username</th>
+					<th scope="col">Password</th>
+					<th scope="col">Level</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#users}}
+				<tr>
+					<th scope="row">{{id}}</th>
+					<td>{{username}}</td>
+					<td>{{password}}</td>
+					<td>{{level}}</td>
+					<td><a class="btn btn-outline-danger btn-sm" href="/admin/delete/user/{{id}}">Delete</a></td>
+				</tr>
+				{{/users}}
+			</tbody>
+		</table>
+		
+
+		<h1 class="display-4">Portrait Management</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Username</th>
+					<th scope="col">Portrait</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#images}}
+				<tr>
+					<th scope="row">{{id}}</th>
+					<td>{{username}}</td>
+					<td><img src="data:{{mimeType}};base64,{{based64}}" class="rounded mx-auto d-block" style="max-width:20%;max-hight:20%"/></td>
+					<td><a class="btn btn-outline-danger btn-sm" href="/admin/delete/image/{{id}}">Delete</a></td>
+				</tr>
+				{{/images}}
+			</tbody>
+		</table>
+  </div>
+
+</div>
+
+{{>footer}}
