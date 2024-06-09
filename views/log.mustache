@@ -7,12 +7,18 @@
 		<div class="header">
 			<h1 class="display-4">Log</h1>
 		</div>
+		<a href="/log/deleteall" class="btn btn-danger mb-3" style="width: 8rem;">Clear All Logs</a>
 		<ol class="list-group">
 			{{#logs}}
 			<li class="list-group-item">
-				<div class="ms-2 me-auto">
-				<div class="fw-bold">{{time}}</div>
-					{{log}}
+				<div class="row ms-2 me-auto">
+					<div class="col-sm-10 mb-3 mb-sm-0">
+						<div class="fw-bold">{{time}}</div>
+						{{log}}
+					</div>
+					<div class="col-sm-2 mb-3 mb-sm-0">
+						<a class="btn btn-outline-danger btn-sm" href="/log/delete/{{id}}">Delete</a>
+					</div> 
 				</div>
 			</li>
 			{{/logs}}

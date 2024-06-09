@@ -39,12 +39,14 @@ async function checkUsername(username)
 }
 
 // Admin Page functionality
+// Get all users
 async function getAllUsers()
 {
     let result = await db.all("SELECT rowid as id, * FROM Users");
     return result;
 }
 
+// Get user by ID
 async function getUsersByID(id)
 {
     let result = await db.all("SELECT rowid as id, * FROM Users WHERE rowid=?",
@@ -52,10 +54,18 @@ async function getUsersByID(id)
     return result;
 }
 
+// Delete user by ID
 async function deleteUserByID(id)
 {
     await db.all("DELETE FROM Users WHERE rowid=?",
     [id]);
+}
+
+// Update user level by username
+async function updateUserLevel(username, level)
+{
+    await db.run("UPDATE Users SET level=? WHERE username=?",
+    [level, username]);
 }
 
 module.exports = {
@@ -64,5 +74,6 @@ module.exports = {
     createUser,
     getAllUsers,
 	getUsersByID,
-	deleteUserByID
+	deleteUserByID,
+    updateUserLevel
 };

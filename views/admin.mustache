@@ -23,13 +23,32 @@
 					<th scope="row">{{id}}</th>
 					<td>{{username}}</td>
 					<td>{{password}}</td>
-					<td>{{level}}</td>
-					<td><a class="btn btn-outline-danger btn-sm" href="/admin/delete/user/{{id}}">Delete</a></td>
+					<td>
+						<form action="/admin/update" encType="multipart/form-data" method="post">
+							<input type="hidden" name="username" value="{{username}}">
+							<div class="input-group">
+								<select name="level" class="form-select form-select-sm selectList">
+									<option value="{{level}}" selected>{{level}}</option>
+									{{#otherLevels}}
+									<option value="{{.}}">{{.}}</option>
+									{{/otherLevels}}
+								</select>
+								<button type="submit" class="btn btn-outline-primary btn-sm" href="">Update</button>
+							</div>
+						</form>
+					</td>
+					<td>
+						{{#isCurrentUser}}
+						<a class="btn btn-outline-danger btn-sm disabled">Delete</a>
+						{{/isCurrentUser}}
+						{{^isCurrentUser}}
+						<a class="btn btn-outline-danger btn-sm" href="/admin/delete/user/{{id}}">Delete</a>
+						{{/isCurrentUser}}
+					</td>
 				</tr>
 				{{/users}}
 			</tbody>
 		</table>
-		
 
 		<h1 class="display-4">Portrait Management</h1>
 		<table class="table">

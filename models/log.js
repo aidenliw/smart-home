@@ -31,7 +31,21 @@ async function createLog(log)
 		[time, log]);
 }
 
+// Delete a log by id
+async function deleteLog(id)
+{
+	await db.run("DELETE FROM Log WHERE rowid = ?", id);
+}
+
+// Delete all logs
+async function deleteAllLogs()
+{
+	await db.run("DELETE FROM Log");
+}
+
 module.exports = {
 	getAllLogs,
-	createLog
+	createLog,
+	deleteLog,
+	deleteAllLogs
 };

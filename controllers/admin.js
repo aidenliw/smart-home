@@ -7,15 +7,44 @@ const LogModel = require('../models/log.js')
 // Display the admin page
 router.get("/", async function(req, res)
 {
+	// Get all users
 	let users = await UsersModel.getAllUsers();
-	req.TPL.users = users;
+	
+	// List of all possible levels
+	const allLevels = ['admin', 'member'];
+	const preparedUsers = users.map(user => {
+		const otherLevels = allLevels.filter(level => level !== user.level);
+		return {
+			...user,
+			otherLevels: otherLevels,
+			isCurrentUser: user.username === req.session.username
+		};
+	});
+	req.TPL.users = preparedUsers;
+
+	// Get all images
 	let images = await ImagesModel.getAllImages();
 	for (let i = 0; i < images.length; i++){
 		images[i].mimeType = "image/jpg";
 		images[i].based64 = Buffer.from(images[i].image).toString('base64');;
 	}
 	req.TPL.images = images;
+
 	res.render("admin", req.TPL);
+});
+
+// Update user level by username
+router.post("/update", async function(req, res)
+{	
+	let adminname = req.session.username;
+	// let username = req.params.username;
+	let level = req.body.level;
+	let username = req.body.username;
+	await UsersModel.updateUserLevel(username, level);
+	// Create a log
+	let log = adminname + " updated user " + username + " to " + level;
+	await LogModel.createLog(log);
+	res.redirect("/admin");
 });
 
 // Delete user by username with the associated image
