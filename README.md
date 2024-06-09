@@ -75,5 +75,3 @@ To make this project a real-world application, we aim to use modular design to e
 This project documentation and further details can be found in the project proposal document.
 
 ---
-
-This README provides a concise overview of the application and instructions for running it locally. For detailed project information, please refer to the project proposal document included in the repository.
