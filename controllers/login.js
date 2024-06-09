@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router();
 const UsersModel = require('../models/users.js');
+const LogModel = require('../models/log.js');
 
 // Displays the login page
 router.get("/", async function(req, res)
@@ -79,6 +80,9 @@ router.post("/attemptsignup", async function(req, res)
 		else {
 			await UsersModel.createUser(input_username,input_password);
 			req.session.signup_success = true;
+			// create a log
+			let log = input_username + " has signed up an account.";
+			await LogModel.createLog(log);
 			res.redirect("/login/signup");
 		}
 	}

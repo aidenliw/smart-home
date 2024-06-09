@@ -1,6 +1,7 @@
 const express = require('express');
 var router = express.Router()
 const PubNubModel = require('../models/pubnub.js');
+const LogModel = require('../models/log.js')
 
 // Display the home page
 router.get("/", async function(req, res)
@@ -18,6 +19,9 @@ router.post("/unlock", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Door Unlocked!";
+        // create a log
+        let log = req.session.username + " unlocked the door";
+        await LogModel.createLog(log);
     } else {
         req.TPL.failed_message = "Unlocking door failed! Please try again later.";
     }
@@ -34,6 +38,9 @@ router.post("/lock", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Door Locked!";
+        // create a log
+        let log = req.session.username + " locked the door";
+        await LogModel.createLog(log);
     } else {
         req.TPL.failed_message = "Locking door failed! Please try again later.";
     }

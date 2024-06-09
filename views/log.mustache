@@ -7,7 +7,16 @@
 		<div class="header">
 			<h1 class="display-4">Log</h1>
 		</div>
-		
+		<ol class="list-group">
+			{{#logs}}
+			<li class="list-group-item">
+				<div class="ms-2 me-auto">
+				<div class="fw-bold">{{time}}</div>
+					{{log}}
+				</div>
+			</li>
+			{{/logs}}
+		</ol>
 	</div>
 </div>
 
