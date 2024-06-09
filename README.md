@@ -13,7 +13,12 @@ The application is hosted on Heroku: [Smart Home](https://smart-home-c847e8fb226
 1. Download all the code files.
 2. Install Node.js on your operating system. You can download it from [Node.js](https://nodejs.org/en).
 3. Navigate to the application root folder.
-4. Run the script `node app.js` to execute the app.
+4. Create an .env file to store the [PubNub](https://www.pubnub.com/) secret keys in the following format:
+    - PUBNUB_PUBLISH_KEY='pub-c-xxx'
+    - PUBNUB_SUBSCRIBE_KEY='sub-c-xxx'
+    - PUBNUB_CHANNEL='smart-home'
+    - PUBNUB_UUID='smart-home-uuid'  
+5. Run the script `node app.js` to execute the app.
 
 ## Project Overview
 
