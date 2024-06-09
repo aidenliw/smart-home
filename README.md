@@ -18,7 +18,8 @@ The application is hosted on Heroku: [Smart Home](https://smart-home-c847e8fb226
     - PUBNUB_SUBSCRIBE_KEY='sub-c-xxx'
     - PUBNUB_CHANNEL='smart-home'
     - PUBNUB_UUID='smart-home-uuid'  
-5. Run the script `node app.js` to execute the app.
+5. Run the script `npm install` to get all required modules.
+6. Run the script `node app.js` to execute the app.
 
 ## Project Overview
 
