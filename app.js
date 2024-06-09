@@ -96,4 +96,6 @@ app.get(/^(.+)$/, function(req,res) {
 });
 
 // Start the server
-app.listen(port, function() {console.log(`Server listening at http://localhost:${port}`);})
+app.listen(process.env.PORT || port, function() {
+	console.log(`Server listening at http://localhost:${port}`);
+})
