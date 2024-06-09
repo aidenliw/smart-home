@@ -23,6 +23,18 @@
 					<th scope="row">{{id}}</th>
 					<td>{{username}}</td>
 					<td>{{password}}</td>
+					{{#isCurrentUser}}
+					<td>
+						<div class="input-group">
+							<select class="form-select form-select-sm selectList" disabled>
+								<option value="{{level}}" selected>{{level}}</option>
+							</select>
+							<button type="submit" class="btn btn-outline-primary btn-sm disabled" href="">Update</button>
+						</div>
+					</td>
+					<td><a class="btn btn-outline-danger btn-sm disabled">Delete</a></td>
+					{{/isCurrentUser}}
+					{{^isCurrentUser}}
 					<td>
 						<form action="/admin/update" encType="multipart/form-data" method="post">
 							<input type="hidden" name="username" value="{{username}}">
@@ -37,13 +49,8 @@
 							</div>
 						</form>
 					</td>
-					<td>
-						{{#isCurrentUser}}
-						<a class="btn btn-outline-danger btn-sm disabled">Delete</a>
-						{{/isCurrentUser}}
-						{{^isCurrentUser}}
-						<a class="btn btn-outline-danger btn-sm" href="/admin/delete/user/{{id}}">Delete</a>
-						{{/isCurrentUser}}
+					<td><a class="btn btn-outline-danger btn-sm" href="/admin/delete/user/{{id}}">Delete</a></td>
+					{{/isCurrentUser}}
 					</td>
 				</tr>
 				{{/users}}
