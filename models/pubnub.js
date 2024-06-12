@@ -18,6 +18,7 @@ async function publishMessage(channel, title, description)
         }
     }
     
+    // Return a promise to handle the publish response
     return new Promise((resolve, reject) => {
         pubnub.publish(publishPayload, function(status, response) {
             if (status.error) {

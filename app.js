@@ -61,16 +61,18 @@ app.use("/member", function(req,res,next) { req.TPL.membersnav = true; next(); }
 app.use("/admin", function(req,res,next) { req.TPL.adminsnav = true; next(); });
 app.use("/login", function(req,res,next) { req.TPL.loginnav = true; next(); });
 app.use("/door", function(req,res,next) { req.TPL.doornav = true; next();});
+app.use("/camera", function(req,res,next) { req.TPL.cameranav = true; next();});
 app.use("/log", function(req,res,next) { req.TPL.lognav = true; next();});
 
-// protect access to the members page, re-direct user to home page if nobody is logged in...
-app.use("/member", function(req,res,next) {
+// protect access to the members, door, and camera pages, 
+// re-direct user to home page if nobody is logged in...
+app.use(["/member", "/door", "/camera"], function(req,res,next) {
 	if (req.session.username) next();
 	else res.redirect("/home");
 });
 
-// protect access to the admin page, re-direct user to home page if nobody is a admin
-app.use("/admin", function(req,res,next) {
+// protect access to the admin and log pages, re-direct user to home page if nobody is a admin
+app.use(["/admin", "/log"], function(req,res,next) {
 	if (req.session.access_level == "admin") next();
 	else if (req.session.access_level == "member") res.redirect("/member");
 	else res.redirect("/home");
@@ -83,6 +85,7 @@ app.use("/member", require("./controllers/member"));
 app.use("/admin", require("./controllers/admin"));
 app.use("/login", require("./controllers/login"));
 app.use("/door", require("./controllers/door"));
+app.use("/camera", require("./controllers/camera"));
 app.use("/log", require("./controllers/log"));
 
 // Route / to redirect to /home by default

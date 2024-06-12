@@ -1,3 +1,16 @@
+Example
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .btn-circle.btn-xl {
     width: 100px;
     height: 100px;
@@ -16,4 +29,49 @@
     vertical-align: middle;
     font-size: 12px;
     line-height: 1.42857;
+}
+
+.arrows {
+    position: relative;
+    top: 50%;
+    margin-top: -50px;
+}
+
+.full-form {
+    height: 100%;
+    width: 100%;
+}
+
+.camera-angle{
+    font-size: 6vw;
+    text-align: center;
+    height: 100%;
+    width: 100%;    
+    display: flex;
+}
+
+.square-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.square {
+    position: relative;
+    flex-basis: calc(33% - 10px);
+    margin: 5px;
+    /* border: 1px solid;
+    box-sizing: border-box; */
+}
+
+.square::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
+.square .content {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 100%;
 }
