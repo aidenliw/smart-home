@@ -6,8 +6,14 @@ const session = require('express-session');
 const mustacheExpress = require('mustache-express');
 const fileUpload = require('express-fileupload');
 const fs = require('fs'); 
+const http = require('http');
+const socketIo = require('socket.io');
 require('dotenv').config()
 // console.log(process.env)
+
+// Create HTTP server
+const server = http.createServer(app);
+const io = socketIo(server);
 
 // Include the mustache engine to help us render our pages
 app.engine("mustache", mustacheExpress());
@@ -101,7 +107,26 @@ app.get(/^(.+)$/, function(req,res) {
   	res.sendFile(__dirname + req.params[0]);
 });
 
+// Socket.IO event handling
+io.on('connection', (socket) => {
+    console.log('Client connected');
+
+    socket.on('video_frame', (frame) => {
+        // Broadcast the frame to all connected clients
+        io.emit('video_stream', frame);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Client disconnected');
+    });
+});
+
 // Start the server
-app.listen(process.env.PORT || port, function() {
+server.listen(process.env.PORT || port, function() {
 	console.log(`Server listening at http://localhost:${port}`);
-})
+});
+
+// // Start the server
+// app.listen(process.env.PORT || port, function() {
+// 	console.log(`Server listening at http://localhost:${port}`);
+// })

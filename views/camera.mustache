@@ -71,7 +71,16 @@
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
         </div>
         
+        <img id="video" src="" alt="Live Stream" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
 
+            socket.on('video_stream', (frame) => {
+                const img = document.getElementById('video');
+                img.src = `data:image/jpeg;base64,${frame}`;
+            });
+        </script>
 
         <h1 class="card-title display-4 my-3">Adjust the Camera Angle</h1>
 
