@@ -69,7 +69,7 @@ router.post("/:direction", async function(req, res)
     // console.log(status);
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
-        req.TPL.succeed_message = "Camera Moving "+ description +" degree!";
+        req.TPL.succeed_message = "Camera Moving "+ direction + " " + degree +" degree!";
         req.TPL.blue = true;
     } else {
         req.TPL.failed_message = "Adjust camera angle failed! Please try again later.";
