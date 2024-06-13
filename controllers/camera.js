@@ -23,6 +23,7 @@ router.post("/activate", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Camera Auto-Tracking Activated!";
+        req.TPL.green = true;
         // create a log
         let log = req.session.username + " enables camera automatic tracking.";
         await LogModel.createLog(log);
@@ -43,6 +44,7 @@ router.post("/deactivate", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Camera Auto-Tracking Deactivated!";
+        req.TPL.red = true;
         // create a log
         let log = req.session.username + " disables camera automatic tracking.";
         await LogModel.createLog(log);
@@ -66,6 +68,7 @@ router.post("/:direction", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Camera Moving "+ description +" degree!";
+        req.TPL.blue = true;
     } else {
         req.TPL.failed_message = "Adjust camera angle failed! Please try again later.";
     }

@@ -19,6 +19,7 @@ router.post("/unlock", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Door Unlocked!";
+        req.TPL.green = true;
         // create a log
         let log = req.session.username + " unlocked the door";
         await LogModel.createLog(log);
@@ -38,6 +39,7 @@ router.post("/lock", async function(req, res)
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
         req.TPL.succeed_message = "Door Locked!";
+        req.TPL.red = true;
         // create a log
         let log = req.session.username + " locked the door";
         await LogModel.createLog(log);

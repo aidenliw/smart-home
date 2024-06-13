@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 8081;
+const path = require('path');
 const session = require('express-session');
 const mustacheExpress = require('mustache-express');
 const fileUpload = require('express-fileupload');
@@ -16,7 +17,9 @@ app.set('views', __dirname + '/views');
 // We use the .urlencoded middleware to process form data in the request body,
 // which is something that occurs when we have a POST request.
 app.use(express.urlencoded({extended: false}));
-app.use("/",express.static("./node_modules/bootstrap/dist/"));
+app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
+
 app.use(fileUpload());
 
 // Use the session middleware

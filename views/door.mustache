@@ -45,7 +45,10 @@
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
             <div class="col-sm-8">
                 {{#succeed_message}}
-                <div class="alert alert-success mt-3" role="alert">
+                <div 
+                {{#green}}class="alert alert-success mt-3"{{/green}}
+                {{#red}}class="alert alert-danger mt-3"{{/red}}
+                role="alert">
                     {{ succeed_message }}
                 </div>
                 {{/succeed_message}}

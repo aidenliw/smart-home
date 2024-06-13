@@ -8,6 +8,36 @@
 			<h1 class="display-3">Camera Control</h1>
 		</div>
 
+        {{#succeed_message}}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div 
+            {{#green}} class="toast align-items-center text-bg-success border-0" {{/green}} 
+            {{#red}} class="toast align-items-center text-bg-danger border-0" {{/red}}
+            {{#blue}} class="toast align-items-center text-bg-primary border-0" {{/blue}} 
+            role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ succeed_message }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {{/succeed_message}}
+
+        {{#failed_message}}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ failed_message }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {{/failed_message}}
+
         <div class="row">
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
             <div class="col-sm-4 mb-3 mb-sm-0">   
@@ -41,22 +71,7 @@
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
         </div>
         
-        <div class="row">
-            <div class="col-sm-2 mb-3 mb-sm-0"></div>
-            <div class="col-sm-8">
-                {{#succeed_message}}
-                <div class="alert alert-success mt-3" role="alert">
-                    {{ succeed_message }}
-                </div>
-                {{/succeed_message}}
-                {{#failed_message}}
-                <div class="alert alert-warning mt-3" role="alert">
-                    {{ failed_message }}
-                </div>
-                {{/failed_message}}
-            </div>
-            <div class="col-sm-2 mb-3 mb-sm-0"></div>
-        </div>
+
 
         <h1 class="card-title display-4 my-3">Adjust the Camera Angle</h1>
 
@@ -122,6 +137,18 @@
 </div>
 
 <script>
+    // Initialize the toast component
+    document.addEventListener('DOMContentLoaded', function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        });
+
+        // Show the toast
+        toastList.forEach(toast => toast.show());
+    });
+
+    {{! Form submission from four arrow buttons}}
     function addInputValueToForm(event) {
         event.preventDefault();
         const form = event.target;
