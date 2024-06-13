@@ -8,14 +8,11 @@ pubnub = new PubNub({
 })
 
 // Publish a message to a channel
-async function publishMessage(channel, title, description)
+async function publishMessage(channel, message)
 {
 	let publishPayload = {
         channel : channel,
-        message: {
-            title: title,
-            description: description
-        }
+        message: message
     }
     
     // Return a promise to handle the publish response

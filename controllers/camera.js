@@ -16,9 +16,10 @@ router.get("/", async function(req, res)
 router.post("/activate", async function(req, res)
 {	
     let channel = process.env.PUBNUB_CHANNEL;
-    let title = "command";
-    let description = "activate";
-    var status = await PubNubModel.publishMessage(channel, title, description);
+    let title = "camera";
+    let command = "activate";
+    let message = { title: title, command: command }
+    var status = await PubNubModel.publishMessage(channel, message);
     // console.log(status);
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
@@ -37,9 +38,10 @@ router.post("/activate", async function(req, res)
 router.post("/deactivate", async function(req, res)
 {	
     let channel = process.env.PUBNUB_CHANNEL;
-    let title = "command";
-    let description = "deactivate";
-    var status = await PubNubModel.publishMessage(channel, title, description);
+    let title = "camera";
+    let command = "deactivate";
+    let message = { title: title, command: command }
+    var status = await PubNubModel.publishMessage(channel, message);
     // console.log(status);
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
@@ -61,9 +63,9 @@ router.post("/:direction", async function(req, res)
     const degree = req.body.degree;
     currentDegree = degree; // update the current degree
     let channel = process.env.PUBNUB_CHANNEL;
-    let title = "command";
-    let description = direction + " " + degree;
-    var status = await PubNubModel.publishMessage(channel, title, description);
+    let title = "camera";
+    let message = { title: title, command: direction, degree: degree }
+    var status = await PubNubModel.publishMessage(channel, message);
     // console.log(status);
     // check if the status is successful
     if (!status.error && status.statusCode === 200){
