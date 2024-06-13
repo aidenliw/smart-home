@@ -25,7 +25,7 @@ router.post("/delete", async function(req, res)
 	if (imgDB.length > 0){ 
 		req.TPL.image_message = "No Portrait to Display";
 		await ImagesModel.deleteImageByUsername(req.session.username);
-		req.TPL.upload_message = "Image successfully deleted!";
+		req.TPL.succeed_message = "Image successfully deleted!";
 	} else {
 		req.TPL.image_message = "No Portrait to Display";
 	}
@@ -46,7 +46,7 @@ router.post("/upload", async function(req, res)
 		} else {
 			req.TPL.image_message = "No Portrait to Display";
 		}
-		req.TPL.upload_failed_message = "Please upload an image!";
+		req.TPL.failed_message = "Please upload an image!";
 		res.render("member", req.TPL);
 
 	} else {
@@ -65,7 +65,7 @@ router.post("/upload", async function(req, res)
 		req.TPL.based64 = Buffer.from(data).toString('base64');;
 		// Insert a message that has successfully been created and
 		// display the member page again
-		req.TPL.upload_message = "Image successfully uploaded!";
+		req.TPL.succeed_message = "Image successfully uploaded!";
 		res.render("member", req.TPL);
 	}
 	

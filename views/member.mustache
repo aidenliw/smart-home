@@ -5,41 +5,82 @@
 <div class="container overflow-auto">
 	<div class="text-center">
 		<div class="header">
-			<h1 class="display-4">Welcome <span class="text-success">{{user}}</span>!</h1>
+			<h1 class="display-3">Welcome <span class="text-success">{{user}}</span>!</h1>
 		</div>
-		<p>Here is your current portrait</p>
-		{{#based64}}
-		<img src="data:{{mimeType}};base64,{{based64}}" class="rounded mx-auto d-block mb-3" style="max-width:60%;max-hight:60%"/>
-		{{/based64}}
-		{{#image_message}}
-		<div class="alert alert-danger" role="alert">
-			{{image_message}}
-		</div>
-		{{/image_message}}
-		<form action="/member/delete" encType="multipart/form-data" method="post">
-			<button type="submit" class="btn btn-outline-danger" style="width: 8rem;">Delete</button>
-		</form>
+
+		{{#succeed_message}}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ succeed_message }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {{/succeed_message}}
+
+        {{#failed_message}}
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{ failed_message }}
+                    </div>
+                    <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {{/failed_message}}
+
+		<div class="row">
+			<h1 class="display-6">Here is your current portrait</h1>
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+            <div class="col-sm-8 mb-3 mb-sm-0">   
+                {{#based64}}
+				<img src="data:{{mimeType}};base64,{{based64}}" class="rounded mx-auto d-block mb-3" style="max-width:60%;max-hight:60%"/>
+				{{/based64}}
+				{{#image_message}}
+				<div class="alert alert-danger" role="alert">
+					{{image_message}}
+				</div>
+				{{/image_message}}
+				<form action="/member/delete" encType="multipart/form-data" method="post">
+					<button type="submit" class="btn btn-outline-danger" style="width: 8rem;">Delete</button>
+				</form>
+            </div>
+            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+        </div>
 		<br />
-		<h1 class="display-5">Update Portrait</h1>
-		{{#upload_message}}
-		<div class="alert alert-success" role="alert">
-			{{ upload_message }}
-		</div>
-		{{/upload_message}}
-		{{#upload_failed_message}}
-		<div class="alert alert-warning" role="alert">
-			{{ upload_failed_message }}
-		</div>
-		{{/upload_failed_message}}
-		<form action="/member/upload" encType="multipart/form-data" method="post">
-			<div class="mb-3">
-				<label for="formFile" class="form-label">Choose a local image to upload</label>
-				<input class="form-control" type="file" id="formFile" name="img">
-			</div>
-			<button type="submit" class="btn btn-outline-primary" style="width: 8rem;">Upload</button>
-		</form>
+		<div class="row">
+			<h1 class="display-6">Update Portrait</h1>
+            <div class="col-sm-3 mb-3 mb-sm-0"></div>
+            <div class="col-sm-6 mb-3 mb-sm-0">   
+				<form action="/member/upload" encType="multipart/form-data" method="post">
+					<div class="mb-3">
+						<label for="formFile" class="form-label">Choose a local image to upload</label>
+						<input class="form-control" type="file" id="formFile" name="img">
+					</div>
+					<button type="submit" class="btn btn-outline-primary" style="width: 8rem;">Upload</button>
+				</form>
+            </div>
+            <div class="col-sm-3 mb-3 mb-sm-0"></div>
+        </div>
 	</div>
 </div>
 
+<script>
+    // Initialize the toast component
+    document.addEventListener('DOMContentLoaded', function () {
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        });
+
+        // Show the toast
+        toastList.forEach(toast => toast.show());
+    });
+</script>
 
 {{>footer}}
