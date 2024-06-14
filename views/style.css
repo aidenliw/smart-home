@@ -47,46 +47,9 @@ input[type=number] {
 }
 
 #camera-angle{
-    font-size: 5vw;
+    font-size: 3rem;
     text-align: center;
     height: 100%;
-    width: 3em;    
+    max-width: 6rem;    
     display: inline-block;
 }
-
-/* .arrows {
-    position: relative;
-    top: 50%;
-    margin-top: -50px;
-}
-
-
-
-
-
-.square-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-.square {
-    position: relative;
-    flex-basis: calc(33% - 10px);
-    margin: 5px;
-    /* border: 1px solid;
-    box-sizing: border-box;
-}
-
-.square::before {
-    content: '';
-    display: block;
-    padding-top: 100%;
-}
-
-.square .content {
-    position: absolute;
-    top: 0; left: 0;
-    height: 100%;
-    width: 100%;
-} 
-    */

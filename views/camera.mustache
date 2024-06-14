@@ -87,12 +87,11 @@
 
 
         <div class="row">
-            <div class="col-sm-2 mb-3 mb-sm-0"></div>
             <div class="col-sm-4 mb-3 mb-sm-0">   
                 <div class="card">
                     <div class="card-body">
                         <label for="activate">
-                            <h1 class="card-title display-6">Activate Auto-Tracking</h1>
+                            <h1 class="card-title display-6">Activate<br />Auto-Tracking</h1>
                             <form action="/camera/activate" encType="multipart/form-data" method="post">
                                 <button type="submit" id="activate" class="btn btn-success btn-circle btn-xl">
                                     <i class="fa-solid fa-users-viewfinder"></i>
@@ -105,10 +104,10 @@
             <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
-                        <label for="deactivate">
-                            <h1 class="card-title display-6">Deactivate Auto-Tracking</h1>
-                            <form action="/camera/deactivate" encType="multipart/form-data" method="post">
-                                <button type="submit" id="deactivate" class="btn btn-danger btn-circle btn-xl">
+                        <label for="initialize">
+                            <h1 class="card-title display-6">Initialize<br />Camera Angle</h1>
+                            <form action="/camera/initialize" encType="multipart/form-data" method="post">
+                                <button type="submit" id="initialize" class="btn btn-primary btn-circle btn-xl">
                                     <i class="fa-solid fa-camera-rotate"></i>
                                 </button>
                             </form>
@@ -116,7 +115,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-2 mb-3 mb-sm-0"></div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <label for="deactivate">
+                            <h1 class="card-title display-6">Deactivate<br />Auto-Tracking</h1>
+                            <form action="/camera/deactivate" encType="multipart/form-data" method="post">
+                                <button type="submit" id="deactivate" class="btn btn-danger btn-circle btn-xl">
+                                    <i class="fa-solid fa-camera"></i>
+                                </button>
+                            </form>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
 	</div>
 </div>
