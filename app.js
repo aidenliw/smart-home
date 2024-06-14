@@ -49,20 +49,6 @@ app.use(function(req,res,next) {
 	next();
 });
 
-// // Create a middleware to generate the log data, and store the data into log.txt
-// app.use((req, res, next) => {
-// 	var log_data = [];
-// 	log_data.push(new Date().toString());
-// 	log_data.push(req.path);
-// 	log_data.push(req.ip);
-// 	log_data.push(JSON.stringify(req.query));
-// 	log_data.push(JSON.stringify(req.body));
-// 	fs.appendFile("log.txt", log_data.join(",") + "\r\n", function(err){
-// 		if (err) throw err;
-// 	})
-// 	next();
-// });
-
 // Create middlewares for setting up navigational highlighting
 app.use("/home", function(req,res,next) {req.TPL.homenav = true; next(); });
 app.use("/about", function(req,res,next) { req.TPL.aboutnav = true; next();});

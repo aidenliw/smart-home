@@ -31,24 +31,38 @@ input[type=number] {
     line-height: 1.42857;
 }
 
-.arrows {
+#video-container {
+    display: block;
+    margin: auto;
+    max-width: 500px;
+    max-height: 375px;
+}
+
+#video-placeholder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
+    height: 100%;
+}
+
+#camera-angle{
+    font-size: 5vw;
+    text-align: center;
+    height: 100%;
+    width: 3em;    
+    display: inline-block;
+}
+
+/* .arrows {
     position: relative;
     top: 50%;
     margin-top: -50px;
 }
 
-.full-form {
-    height: 100%;
-    width: 100%;
-}
 
-.camera-angle{
-    font-size: 6vw;
-    text-align: center;
-    height: 100%;
-    width: 100%;    
-    display: flex;
-}
+
+
 
 .square-container {
     display: flex;
@@ -60,7 +74,7 @@ input[type=number] {
     flex-basis: calc(33% - 10px);
     margin: 5px;
     /* border: 1px solid;
-    box-sizing: border-box; */
+    box-sizing: border-box;
 }
 
 .square::before {
@@ -74,4 +88,5 @@ input[type=number] {
     top: 0; left: 0;
     height: 100%;
     width: 100%;
-}
+} 
+    */

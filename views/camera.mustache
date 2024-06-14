@@ -37,6 +37,54 @@
             </div>
         </div>
         {{/failed_message}}
+        <h1 class="card-title display-4 my-3">
+            Rotate 
+            <input type="number" class="form-control camera-angle" id="camera-angle" name="degree" value="{{degree}}">
+            Degree
+        </h1>
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row mb-0 justify-content-center align-items-center">
+                    <div class="col-sm-2 d-flex flex-column align-items-center mb-3 mb-sm-0">
+                        <form class="mb-3" action="/camera/up" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
+                            <button type="submit" id="up" class="btn btn-primary btn-circle btn-xl arrows">
+                                <i class="fa-solid fa-arrow-up"></i>
+                            </button>
+                        </form>
+                        <form class="mb-3" action="/camera/down" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
+                            <button type="submit" id="down" class="btn btn-primary btn-circle btn-xl arrows">
+                                <i class="fa-solid fa-arrow-down"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="video-container">
+                                    <img id="video" src="" alt="Live Stream" style="display:none" />
+                                    <div id="video-placeholder" class="alert alert-light mb-0" role="alert">
+                                        No live stream available.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 d-flex flex-column align-items-center mb-3 mb-sm-0">
+                        <form class="mb-3" action="/camera/left" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
+                            <button type="submit" id="left" class="btn btn-primary btn-circle btn-xl arrows">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </form>
+                        <form class="mb-3" action="/camera/right" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
+                            <button type="submit" id="right" class="btn btn-primary btn-circle btn-xl arrows">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
@@ -70,81 +118,10 @@
             </div>
             <div class="col-sm-2 mb-3 mb-sm-0"></div>
         </div>
-        
-        <img id="video" src="" alt="Live Stream" />
-        <script src="/socket.io/socket.io.js"></script>
-        <script>
-            const socket = io();
-
-            socket.on('video_stream', (frame) => {
-                const img = document.getElementById('video');
-                img.src = `data:image/jpeg;base64,${frame}`;
-            });
-        </script>
-
-        <h1 class="card-title display-4 my-3">Adjust the Camera Angle</h1>
-
-        <div class="row">
-            <div class="col-3 mb-3 mb-sm-0"></div>
-            <div class="col-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="square-container">
-                            <div class="square"><div class="content"></div></div>
-                            <div class="square">
-                                <div class="content">
-                                    <form class="full-form" action="/camera/up" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                                        <button type="submit" id="up" class="btn btn-primary btn-circle btn-xl arrows">
-                                            <i class="fa-solid fa-arrow-up"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="square"><div class="content"></div></div>
-                            <div class="square">
-                                <div class="content">
-                                    <form class="full-form" action="/camera/left" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                                        <button type="submit" id="left" class="btn btn-primary btn-circle btn-xl arrows">
-                                            <i class="fa-solid fa-arrow-left"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="square">
-                                <div class="content">
-                                    <input type="number" class="form-control camera-angle" id="camera-angle" name="degree" value="{{degree}}">
-                                </div>
-                            </div>
-                            <div class="square">
-                                <div class="content">
-                                    <form class="full-form" action="/camera/right" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                                        <button type="submit" id="right" class="btn btn-primary btn-circle btn-xl arrows">
-                                            <i class="fa-solid fa-arrow-right"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="square"><div class="content"></div></div>
-                            <div class="square">
-                                <div class="content">
-                                    <form class="full-form" action="/camera/down" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                                        <button type="submit" id="down" class="btn btn-primary btn-circle btn-xl arrows">
-                                            <i class="fa-solid fa-arrow-down"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="square"><div class="content"></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-3 mb-3 mb-sm-0"></div>
-        </div>
-		
 	</div>
 </div>
 
+<script src="/socket.io/socket.io.js"></script>
 <script>
     // Initialize the toast component
     document.addEventListener('DOMContentLoaded', function () {
@@ -167,6 +144,23 @@
         form.appendChild(inputClone);
         form.submit();
     }
+
+    // Initialize the socket connection
+    const socket = io();
+    const img = document.getElementById('video');
+    const placeholder = document.getElementById('video-placeholder');
+
+    socket.on('video_stream', (frame) => {
+        if (frame) {
+            img.src = `data:image/jpeg;base64,${frame}`;
+            img.style.display = 'inline-block';
+            placeholder.style.display = 'none';
+        } else {
+            img.style.display = 'none';
+            placeholder.style.display = 'inline-block';
+        }
+    });
+
 </script>
 
 {{>footer}}
