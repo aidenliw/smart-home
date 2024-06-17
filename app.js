@@ -22,7 +22,8 @@ app.set('views', __dirname + '/views');
 
 // We use the .urlencoded middleware to process form data in the request body,
 // which is something that occurs when we have a POST request.
-app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')));
 

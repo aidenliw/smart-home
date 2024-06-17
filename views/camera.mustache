@@ -145,7 +145,7 @@
 
                 const direction = event.currentTarget.getAttribute("data-direction");
                 const degree = document.querySelector("#camera-angle")?.value || 0;
-
+                console.log(degree);
                 try {
                     const response = await fetch(`/camera/${direction}`, {
                         method: "POST",
@@ -169,17 +169,6 @@
             });
         });
     });
-
-    // Form submission from four arrow buttons}}
-    // function addInputValueToForm(event) {
-    //    event.preventDefault();
-    //    const form = event.target;
-    //    const input = document.getElementById('camera-angle');
-    //    const inputClone = input.cloneNode(true);
-    //    inputClone.style.display = 'none';
-    //    form.appendChild(inputClone);
-    //    form.submit();
-    //}
 
     // Initialize the socket connection
     const socket = io();
