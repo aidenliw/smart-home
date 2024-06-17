@@ -46,16 +46,12 @@
             <div class="card-body">
                 <div class="row mb-0 justify-content-center align-items-center">
                     <div class="col-12 col-sm-2 d-flex flex-column flex-sm-column align-items-center mb-3 mb-sm-0 buttons-container">
-                        <form class="mb-3" action="/camera/up" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                            <button type="submit" id="up" class="btn btn-primary btn-circle btn-xl arrows">
-                                <i class="fa-solid fa-arrow-up"></i>
-                            </button>
-                        </form>
-                        <form class="mb-3" action="/camera/down" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                            <button type="submit" id="down" class="btn btn-primary btn-circle btn-xl arrows">
-                                <i class="fa-solid fa-arrow-down"></i>
-                            </button>
-                        </form>
+                        <button id="up" class="btn btn-primary btn-circle btn-xl arrows" data-direction="up">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                        <button id="down" class="btn btn-primary btn-circle btn-xl arrows" data-direction="down">
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </button>
                     </div>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <div class="card">
@@ -70,16 +66,12 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-2 d-flex flex-column flex-sm-column align-items-center mb-3 mb-sm-0 buttons-container">
-                        <form class="mb-3" action="/camera/left" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                            <button type="submit" id="left" class="btn btn-primary btn-circle btn-xl arrows">
-                                <i class="fa-solid fa-arrow-left"></i>
-                            </button>
-                        </form>
-                        <form class="mb-3" action="/camera/right" encType="multipart/form-data" method="post" onsubmit="addInputValueToForm(event)">
-                            <button type="submit" id="right" class="btn btn-primary btn-circle btn-xl arrows">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </form>
+                        <button id="left" class="btn btn-primary btn-circle btn-xl arrows" data-direction="left">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </button>
+                        <button id="right" class="btn btn-primary btn-circle btn-xl arrows" data-direction="right">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -144,18 +136,50 @@
 
         // Show the toast
         toastList.forEach(toast => toast.show());
+
+        const arrow_buttons = document.querySelectorAll(".arrows");
+
+        arrow_buttons.forEach(button => {
+            button.addEventListener("click", async (event) => {
+                event.preventDefault();
+
+                const direction = event.currentTarget.getAttribute("data-direction");
+                const degree = document.querySelector("#camera-angle")?.value || 0;
+
+                try {
+                    const response = await fetch(`/camera/${direction}`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ degree: degree })
+                    });
+
+                    const result = await response.json();
+
+                    //if (response.ok) {
+                    //    alert(`Camera Moving ${direction} ${degree} degree!`);
+                    //} else {
+                    //    alert(`Adjust camera angle failed! Please try again later.`);
+                    //}
+                } catch (error) {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
+                }
+            });
+        });
     });
 
-    {{! Form submission from four arrow buttons}}
-    function addInputValueToForm(event) {
-        event.preventDefault();
-        const form = event.target;
-        const input = document.getElementById('camera-angle');
-        const inputClone = input.cloneNode(true);
-        inputClone.style.display = 'none';
-        form.appendChild(inputClone);
-        form.submit();
-    }
+    // Form submission from four arrow buttons}}
+    // function addInputValueToForm(event) {
+    //    event.preventDefault();
+    //    const form = event.target;
+    //    const input = document.getElementById('camera-angle');
+    //    const inputClone = input.cloneNode(true);
+    //    inputClone.style.display = 'none';
+    //    form.appendChild(inputClone);
+    //    form.submit();
+    //}
 
     // Initialize the socket connection
     const socket = io();

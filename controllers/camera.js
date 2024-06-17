@@ -3,7 +3,7 @@ var router = express.Router()
 const PubNubModel = require('../models/pubnub.js');
 const LogModel = require('../models/log.js')
 
-let currentDegree = 45;
+let currentDegree = 5;
 
 // Display the home page
 router.get("/", async function(req, res)
@@ -79,25 +79,42 @@ router.post("/initialize", async function(req, res)
 	res.render("camera", req.TPL); 
 });
 
-router.post("/:direction", async function(req, res)
-{	
+router.post("/:direction", async function(req, res) 
+{    
     const direction = req.params.direction;
     const degree = req.body.degree;
     currentDegree = degree; // update the current degree
     let channel = process.env.PUBNUB_CHANNEL;
     let title = "camera";
-    let message = { title: title, command: direction, degree: degree }
+    let message = { title: title, command: direction, degree: degree };
     var status = await PubNubModel.publishMessage(channel, message);
-    // console.log(status);
-    // check if the status is successful
+    
     if (!status.error && status.statusCode === 200){
-        req.TPL.succeed_message = "Camera Moving "+ direction + " " + degree +" degree!";
-        req.TPL.blue = true;
+        res.json({ success: true, message: `Camera Moving ${direction} ${degree} degree!` });
     } else {
-        req.TPL.failed_message = "Adjust camera angle failed! Please try again later.";
+        res.status(500).json({ success: false, message: "Adjust camera angle failed! Please try again later." });
     }
-    req.TPL.degree = currentDegree;
-	res.render("camera", req.TPL); 
 });
+
+// router.post("/:direction", async function(req, res)
+// {	
+//     const direction = req.params.direction;
+//     const degree = req.body.degree;
+//     currentDegree = degree; // update the current degree
+//     let channel = process.env.PUBNUB_CHANNEL;
+//     let title = "camera";
+//     let message = { title: title, command: direction, degree: degree }
+//     var status = await PubNubModel.publishMessage(channel, message);
+//     // console.log(status);
+//     // check if the status is successful
+//     if (!status.error && status.statusCode === 200){
+//         req.TPL.succeed_message = "Camera Moving "+ direction + " " + degree +" degree!";
+//         req.TPL.blue = true;
+//     } else {
+//         req.TPL.failed_message = "Adjust camera angle failed! Please try again later.";
+//     }
+//     req.TPL.degree = currentDegree;
+// 	res.render("camera", req.TPL); 
+// });
 
 module.exports = router;
