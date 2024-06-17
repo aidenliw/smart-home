@@ -53,3 +53,17 @@ input[type=number] {
     max-width: 6rem;    
     display: inline-block;
 }
+
+@media (max-width: 576px) {
+    .buttons-container {
+        flex-direction: row !important;
+        justify-content: center !important; /* Center the buttons horizontally */
+    }
+    .buttons-container form {
+        margin-bottom: 0 !important;
+        margin-right: 10px;
+    }
+    .buttons-container form:last-child {
+        margin-right: 0; /* Remove right margin for the last form */
+    }
+}
