@@ -11,10 +11,11 @@ router.get("/", async function(req, res)
 
 router.post("/unlock", async function(req, res)
 {	
+    let username = req.session.username;
     let channel = process.env.PUBNUB_CHANNEL;
     let title = "door";
     let command = "unlock";
-    let message = { title: title, command: command }
+    let message = { title: title, command: command, user: username }
     var status = await PubNubModel.publishMessage(channel, message);
     // console.log(status);
     // check if the status is successful
@@ -32,10 +33,11 @@ router.post("/unlock", async function(req, res)
 
 router.post("/lock", async function(req, res)
 {	
+    let username = req.session.username;
     let channel = process.env.PUBNUB_CHANNEL;
     let title = "door";
     let command = "lock";
-    let message = { title: title, command: command }
+    let message = { title: title, command: command, user: username }
     var status = await PubNubModel.publishMessage(channel, message);
     // console.log(status);
     // check if the status is successful
