@@ -35,8 +35,8 @@ In an era where home security is paramount, integrating advanced technology to e
 The web application is built using Node.js with the Mustache framework and SQLite for database management. It leverages the PubNub library for real-time communication to control hardware components such as the door lock and camera. The application consists of eight pages: Home, Door, Camera, Member, Admin, Log, About, and Login/Register.
 
 **Hosting and Source Code**
-- The application is hosted and can be accessed on Heroku.
-- The source code is open-sourced and available on GitHub.
+- The application is hosted and can be accessed on [Heroku](https://smart-home-c847e8fb2263.herokuapp.com).
+- The source code is open-sourced and available on [GitHub](https://github.com/aidenliw/smart-home).
 
 **Programming Technology**
 - **Node.js and Mustache**: Used for server-side scripting and rendering dynamic web pages.
