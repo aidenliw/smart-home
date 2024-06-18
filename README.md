@@ -6,7 +6,7 @@ This application is written in Node.js with the Mustache frontend framework and 
 
 This application is part of our Home Security System project, which aims to enhance home safety using advanced technology. The project integrates various modules like motion detection, object tracking, access systems, and alert mechanisms to provide a comprehensive security solution.
 
-The application is hosted on Heroku: [Smart Home](https://smart-home-c847e8fb2263.herokuapp.com/home).
+The application is hosted on Heroku: [Smart Home](http://www.smart-home-app.site).
 
 ## How to Run This App Locally
 
@@ -17,7 +17,7 @@ The application is hosted on Heroku: [Smart Home](https://smart-home-c847e8fb226
     - PUBNUB_PUBLISH_KEY='pub-c-xxx'
     - PUBNUB_SUBSCRIBE_KEY='sub-c-xxx'
     - PUBNUB_CHANNEL='smart-home'
-    - PUBNUB_UUID='smart-home-uuid'  
+    - PUBNUB_UUID='smart-home-uuid'
 5. Run the script `npm install` to get all required modules.
 6. Run the script `node app.js` to execute the app.
 
@@ -27,30 +27,66 @@ The application is hosted on Heroku: [Smart Home](https://smart-home-c847e8fb226
 
 In an era where home security is paramount, integrating advanced technology to enhance safety measures is crucial. This project proposes the development of a smart security system using Raspberry Pi, a camera, a motion sensor, a servo motor, a buzzer, and a door lock mechanism for home security. The system will track detected individuals approaching the home, allowing authorized access via a pin code or fob key. A web server will be designed for online connectivity, enabling remote control of the security system.
 
-### Modular Design
+### Modules and Implementation
 
-To make this project a real-world application, we aim to use modular design to ease the effort of connecting different modules together. The functional modules include:
+#### Smart Home System: Remote Control Web Application
 
-- **Motion Detection System**: Utilizes ultrasonic sensors to detect the presence of individuals.
-- **Camera Tracking System**: Builds a rotation mechanism with two degrees of freedom to track individuals within detection. The rotation mechanism will be enabled by a servo motor.
-- **Host Recognition**: Utilizes a face recognition model to identify authorized individuals using the Husky AI camera or by training a deep learning model using PiCam or a webcam.
-- **Door Locking System**:
-  - **Simple Version**: Uses another servo motor or an LED light to indicate whether the door is locked or unlocked.
-  - **Advanced Version**: Uses a solenoid door lock with a relay for a more practical application.
-- **Gain Access**:
-  - **Simple Version**: Uses a push button to gain access.
-  - **Advanced Version**: Uses a keypad with a password or an RFID key card to gain access.
-- **Alert Mechanism**: Integrates a buzzer and notification system to alert the host of any potential intrusion.
-- **User-Friendly Interface**: Designs an interface for easy monitoring and control of the system, with remote control functionality for locking/unlocking and activating/canceling alarms.
+**Overview**
+The web application is built using Node.js with the Mustache framework and SQLite for database management. It leverages the PubNub library for real-time communication to control hardware components such as the door lock and camera. The application consists of eight pages: Home, Door, Camera, Member, Admin, Log, About, and Login/Register.
 
-### Methodology
+**Hosting and Source Code**
+- The application is hosted and can be accessed on Heroku.
+- The source code is open-sourced and available on GitHub.
 
-1. **Hardware Setup**: Connect all required hardware to the Raspberry Pi and add an external power source.
-2. **Software Development**: Program the Raspberry Pi to activate all hardware with proper GPIO setup.
-3. **Tracking and Host Recognition Algorithm**: Implement object tracking and facial recognition algorithms using OpenCV, CNN, or a customized YOLO model.
-4. **Alert System Integration**: Activate the buzzer upon intrusion detection and configure the system to send real-time alerts to a web account or cell phone via SMS.
-5. **Interface Development**: Create a user interface for live feeds and data access.
-6. **Testing and Optimization**: Test the system under various scenarios and optimize it for accuracy and speed.
+**Programming Technology**
+- **Node.js and Mustache**: Used for server-side scripting and rendering dynamic web pages.
+- **SQLite**: Stores user credentials securely, with hashed passwords to enhance security.
+- **PubNub**: Facilitates real-time communication between the web application and hardware components.
+
+**Web Application Pages**
+- **Home Page**: Provides a brief introduction to the project and its functionalities.
+- **Door Page**: Allows users to lock and unlock the door using two buttons.
+- **Camera Page**: Users can adjust the camera angle using arrow buttons, activate/deactivate the auto-tracking function, and reset the camera to its initial position. Additionally, this page includes a window to display real-time streaming from the camera, allowing users to see live footage as they control the camera.
+- **Member Page**: Users can update a portrait for their account.
+- **Admin Page**: Administrators can manage user accounts, including changing account levels and deleting accounts/portraits.
+- **Log Page**: Available to administrators, this page logs user actions such as account registration, door lock/unlock events, and camera activation/deactivation.
+- **About Page**: Introduces team members, highlighting their skills and contributions to the project.
+- **Login/Register Page**: Facilitates user registration and login.
+
+**User Authentication and Authorization**
+The application implements a role-based access control system:
+- **Unauthenticated Users**: Can access Home, About, and Login/Register pages.
+- **Member Level Users**: Have access to Home, About, Door, Camera, Member, and Login/Register pages.
+- **Admin Level Users**: In addition to member access, admins can access the Admin and Log pages.
+
+**Database Design**
+The SQLite database stores user credentials, including usernames, passwords, and user portraits. Each user has an assigned role that determines their access level.
+
+**Real-time Control with PubNub**
+The PubNub library is integral to the application's real-time control capabilities:
+- **Door Control**: Sends commands to lock or unlock the door.
+- **Camera Control**: Sends commands to adjust the camera angle, toggle the auto-tracking feature, and stream real-time video footage to the Camera page.
+
+**Challenges and Solutions**
+- **Real-time Communication**: Ensuring seamless and secure communication with hardware components required extensive testing and optimization.
+- **User Authentication**: Implementing robust authentication mechanisms to prevent unauthorized access was crucial.
+- **Database Security**: Protecting user data, especially passwords, was addressed by using hashing and secure storage practices.
+
+**Conclusion**
+The web application for our smart home system provides an intuitive and secure interface for managing home security functions. Its modular design allows for easy integration with various hardware components, enhancing the overall functionality and user experience.
+
+**Future Work**
+Future enhancements could include:
+- **Enhanced Security Features**: Implementing two-factor authentication for added security.
+- **Mobile App Integration**: Developing a mobile application to complement the web interface.
+- **Expanded Functionality**: Adding more control features for other smart home devices.
+
+### Design and Development Stages
+
+1. **Research**: Analyze existing systems and identify potential improvements.
+2. **Planning**: Design the architecture of the system, including hardware and software components.
+3. **Development**: Implement the modules and integrate them into the system.
+4. **Testing**: Test the system under various scenarios and optimize it for accuracy and speed.
 
 ### Expected Outcomes
 
