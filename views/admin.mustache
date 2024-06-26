@@ -22,7 +22,7 @@
 				<tr>
 					<th scope="row">{{id}}</th>
 					<td>{{username}}</td>
-					<td>{{password}}</td>
+					<td class="password-cell" data-password="{{password}}">{{password}}</td>
 					{{#isCurrentUser}}
 					<td>
 						<div class="input-group">
@@ -81,5 +81,24 @@
   </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const passwordCells = document.querySelectorAll('.password-cell');
+        passwordCells.forEach(cell => {
+            const originalPassword = cell.getAttribute('data-password');
+            const maskedPassword = '**********';
+            cell.textContent = maskedPassword;
+
+            cell.addEventListener('click', () => {
+                if (cell.textContent === maskedPassword) {
+                    cell.textContent = originalPassword;
+                } else {
+                    cell.textContent = maskedPassword;
+                }
+            });
+        });
+    });
+</script>
 
 {{>footer}}
