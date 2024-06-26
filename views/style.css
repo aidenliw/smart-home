@@ -34,6 +34,7 @@ input[type=number] {
 #video-container {
     display: block;
     margin: auto;
+    width: 100%;
     max-width: 500px;
     max-height: 375px;
 }
@@ -52,6 +53,11 @@ input[type=number] {
     height: 100%;
     max-width: 6rem;    
     display: inline-block;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
 }
 
 @media (max-width: 576px) {
